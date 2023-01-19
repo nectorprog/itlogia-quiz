@@ -38,10 +38,37 @@ a {
     border: 0;
     transition: .4s;
     cursor: pointer;
+    text-decoration: none;
+}
+
+a.button {
+    display: inline-block;
 }
 
 .button:hover {
     background: #32098a;
+}
+
+.button:disabled {
+    background-color: #e2dfe7;
+    cursor: not-allowed;
+}
+
+.button-transparent {
+    background: transparent;
+    color: #6933DC;
+    border: 1px solid #6933DC;
+}
+
+.button-transparent:hover {
+    background: #6933DC;
+    color: white;
+}
+
+.button-transparent:disabled {
+    background: transparent;
+    color: #e2dfe7;
+    border: 1px solid #e2dfe7;
 }
 
 .footer {
@@ -61,5 +88,15 @@ a {
 }
 
 .common-title span {
+    color: #6933DC;
+}
+
+.big-title {
+    font-family: 'Museo Sans Cyrl Bold', sans-serif;
+    font-size: 54px;
+    line-height: 65px;
+}
+
+.big-title span {
     color: #6933DC;
 }

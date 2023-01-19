@@ -21,6 +21,7 @@
 
 .choice-options {
     margin-top: 60px;
+    width: 588px;
 }
 
 .choice-option {
@@ -30,7 +31,7 @@
     line-height: 22px;
     padding: 26px 80px 26px 40px;
     position: relative;
-    box-sizing: border-box;
+    transition: .2s ease all;
 }
 
 .choice-option:hover {
