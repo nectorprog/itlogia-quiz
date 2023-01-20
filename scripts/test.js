@@ -9,11 +9,11 @@
         quiz: null,
         currentQuestionIndex: 1,
         userResult: [],
+        finalAnswers: [],
         init() {
             checkUserData();
 
-            const url = new URL(location.href);
-            const testId = url.searchParams.get('id');
+            const testId = localStorage.getItem('id');
             if (testId) {
                 const xhr = new XMLHttpRequest();
                 xhr.open('GET', 'https://testologia.site/get-quiz?id=' + testId, false);
@@ -154,6 +154,8 @@
                 })
             }
 
+            this.finalAnswers[this.currentQuestionIndex - 1] = chosenAnswerId;
+
 
             if (action === 'next' || action === 'pass') {
                 this.currentQuestionIndex++;
@@ -181,11 +183,12 @@
             this.showQuestion();
         },
         complete () {
-            const url = new URL(location.href);
-            const id = url.searchParams.get('id');
-            const name = url.searchParams.get('name');
-            const lastName = url.searchParams.get('lastName');
-            const email = url.searchParams.get('email');
+            const id = localStorage.getItem('id');
+            const name = localStorage.getItem('name');
+            const lastName = localStorage.getItem('lastName');
+            const email = localStorage.getItem('email');
+
+            localStorage.setItem('results', JSON.stringify(this.finalAnswers));
 
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'https://testologia.site/pass-quiz?id=' + id, false);
@@ -197,6 +200,8 @@
                 results: this.userResult
             }));
 
+
+
             if (xhr.status === 200 && xhr.responseText) {
                 let result = null;
                 try {
@@ -205,8 +210,9 @@
                     location.href = 'index.html';
                 }
                 if (result) {
-
-                    location.href = 'result.html?score=' + result.score + '&total=' + result.total;
+                    localStorage.setItem('resScore', result.score);
+                    localStorage.setItem('resTotal', result.total);
+                    location.href = 'result.html';
                 }
                 this.startQuiz();
             } else {

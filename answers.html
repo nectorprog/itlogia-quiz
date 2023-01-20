@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация</title>
+    <title>Ответы</title>
     <link rel="stylesheet" href="styles/common.css">
     <link rel="stylesheet" href="styles/answers.css">
 </head>
@@ -20,49 +20,26 @@
         <div class="result-links">
             <a href="result.html" class="prev-link">Результат прохождения теста</a>
             <img src="images/answer-arrow.png" alt="стрелка" class="result-arrow">
-            <a href="#" class="next-link">Тест №1. “JavaScript: Начальный уровень”</a>
+            <a href="test.html" class="next-link" id="next-link">Тест №1. “JavaScript: Начальный уровень”</a>
         </div>
         <div class="result-title">
             <span>Правильные ответы </span>к тесту
         </div>
-        <div class="user-info">
+        <div class="user-info" id="user-info">
             <span>Тест выполнил </span>Роман Чернов, roman@itlogia.ru
         </div>
-        <div class="test-questions">
+        <div class="test-questions" id="test-questions">
             <div class="test-question">
-                <div class="test-question-title" id="title">
+                <div class="test-question-title">
                     <span>Вопрос 2:</span> Тут должен быть текст вопроса?
                 </div>
-                <div class="test-question-options" id="options">
+                <div class="test-question-options">
                     <div class="test-question-option">
                         <input type="radio" id="answer-one" name="answer" class="true">
                         <label for="answer-one">Вариант ответа 1</label>
                     </div>
                     <div class="test-question-option">
-                        <input type="radio" id="answer-two" name="answer" class="false">
-                        <label for="answer-two">Вариант ответа 2</label>
-                    </div>
-                    <div class="test-question-option">
-                        <input type="radio" id="answer-three" name="answer">
-                        <label for="answer-three">Вариант ответа 3</label>
-                    </div>
-                    <div class="test-question-option">
-                        <input type="radio" id="answer-four" name="answer">
-                        <label for="answer-four">Вариант ответа 4</label>
-                    </div>
-                </div>
-            </div>
-            <div class="test-question">
-                <div class="test-question-title" id="title">
-                    <span>Вопрос 2:</span> Тут должен быть текст вопроса?
-                </div>
-                <div class="test-question-options" id="options">
-                    <div class="test-question-option">
-                        <input type="radio" id="answer-one" name="answer" >
-                        <label for="answer-one">Вариант ответа 1</label>
-                    </div>
-                    <div class="test-question-option">
-                        <input type="radio" id="answer-two" name="answer">
+                        <input type="radio" id="answer-two" name="answer" class="false" checked>
                         <label for="answer-two">Вариант ответа 2</label>
                     </div>
                     <div class="test-question-option">
