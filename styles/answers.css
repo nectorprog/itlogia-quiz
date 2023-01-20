@@ -1,0 +1,123 @@
+.header {
+    margin-bottom: 20px;
+}
+
+.result-links {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 60px;
+}
+.prev-link {
+    font-size: 20px;
+    line-height: 24px;
+    color: #DCDCF3;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.result-arrow {
+    margin-right: 15px;
+}
+
+.next-link {
+    font-size: 20px;
+    line-height: 24px;
+    color: #6933DC;
+    text-decoration: none;
+}
+
+.result-title {
+    color: #333333;
+    font-size: 54px;
+    line-height: 65px;
+    font-family: "Museo Sans Cyrl Bold", sans-serif;
+    margin-bottom: 10px;
+}
+
+.result-title span {
+    color: #6933DC;
+}
+.test-question:not(:last-child) {
+    margin-bottom: 60px;
+}
+.test-question-title {
+    font-size: 36px;
+    line-height: 43px;
+    font-family: 'Museo Sans Cyrl Bold', sans-serif;
+}
+
+.test-question-title span {
+    color: #6933DC;
+}
+
+.test-question-options {
+    margin-top: 40px;
+    min-height: 156px;
+}
+
+.test-question-option {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.test-question-option label {
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #6933DC;
+    border-radius: 50%;
+    margin: 0 13px 0 0;
+    transform: translateY(2px);
+
+    display: grid;
+    place-content: center;
+}
+
+input[type="radio"]:checked.true {
+    border: 6px solid #5FDC33;
+}
+
+input[type="radio"]:checked.false {
+    border: 6px solid #DC3333;
+}
+
+.link-wrapper {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.answers-link {
+    text-decoration: none;
+    color: #6933DC;
+    font-size: 17px;
+    line-height: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.answers-link img {
+    margin-left: 13px;
+}
+
+.user-info {
+    margin-bottom: 60px;
+    font-size: 20px;
+    line-height: 24px;
+    color: #6933DC;
+    font-family: "Museo Sans Cyrl Bold", sans-serif;
+}
+
+.user-info span {
+    font-family: "Museo Sans Cyrl", sans-serif;
+    color: #333333;
+}

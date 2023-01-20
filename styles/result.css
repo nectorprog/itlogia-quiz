@@ -37,3 +37,22 @@
     color: #FFFFFF;
     font-family: 'Museo Sans Cyrl Bold', sans-serif;
 }
+
+.link-wrapper {
+    margin-top: 80px;
+    text-align: right;
+}
+
+.answers-link {
+    text-decoration: none;
+    color: #6933DC;
+    font-size: 17px;
+    line-height: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.answers-link img {
+    margin-left: 13px;
+}
