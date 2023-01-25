@@ -4,6 +4,6 @@ function checkUserData() {
     const email = localStorage.getItem('email');
 
     if (!name || !lastname || !email) {
-        location.href = 'index.html';
+        location.href = '#/';
     }
 }
