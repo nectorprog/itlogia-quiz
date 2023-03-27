@@ -1,6 +1,10 @@
 import {UrlManager} from "../utils/url-manager.js";
+import {CustomHttp} from "../services/custom-http.js";
+import config from "../../config/config.js";
+import {Auth} from "../services/auth.js";
 
 export class Test {
+
     constructor() {
         this.progressBarElement = null;
         this.nextButtonElement = null;
@@ -12,26 +16,26 @@ export class Test {
         this.currentQuestionIndex = 1;
         this.userResult = [];
         this.finalAnswers = [];
+        this.testId = localStorage.getItem('id');
 
-        UrlManager.checkUserData();
+        this.init();
+    }
 
-        const testId = localStorage.getItem('id');
-        if (testId) {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://testologia.site/get-quiz?id=' + testId, false);
-            xhr.send();
-            if (xhr.status === 200 && xhr.responseText) {
-                try {
-                    this.quiz = JSON.parse(xhr.responseText);
-                } catch (e) {
-                    location.href = '#/';
+    async init() {
+        if (this.testId) {
+            try {
+                const result = await CustomHttp.request(config.host + '/tests/' + this.testId);
+                if (result) {
+                    if (result.error) {
+                        throw new Error(result.error);
+                    }
+
+                    this.quiz = result;
+                    this.startQuiz();
                 }
-                this.startQuiz();
-            } else {
-                location.href = '#/';
+            } catch (error) {
+                return console.log(error);
             }
-        } else {
-            location.href = '#/';
         }
     }
 
@@ -53,11 +57,11 @@ export class Test {
 
         const timerElement = document.getElementById('timer');
         let seconds = 59;
-        const interval = setInterval(function () {
+        this.interval = setInterval(function () {
             seconds--;
             timerElement.innerText = seconds;
             if (seconds === 0) {
-                clearInterval(interval);
+                clearInterval(this.interval);
                 this.complete();
             }
         }.bind(this), 1000)
@@ -171,6 +175,7 @@ export class Test {
         }
 
         if (this.currentQuestionIndex > this.quiz.questions.length) {
+            clearInterval(this.interval);
             this.complete();
             return;
         }
@@ -190,40 +195,55 @@ export class Test {
         this.showQuestion();
     };
 
-    complete() {
-        const id = localStorage.getItem('id');
-        const name = localStorage.getItem('name');
-        const lastName = localStorage.getItem('lastName');
-        const email = localStorage.getItem('email');
-
-        localStorage.setItem('results', JSON.stringify(this.finalAnswers));
-
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://testologia.site/pass-quiz?id=' + id, false);
-        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        xhr.send(JSON.stringify({
-            name: name,
-            lastName: lastName,
-            email: email,
-            results: this.userResult
-        }));
-
-
-        if (xhr.status === 200 && xhr.responseText) {
-            let result = null;
-            try {
-                result = JSON.parse(xhr.responseText);
-            } catch (e) {
-                location.href = '#/';
-            }
-            if (result) {
-                localStorage.setItem('resScore', result.score);
-                localStorage.setItem('resTotal', result.total);
-                location.href = '#/result';
-            }
-            this.startQuiz();
-        } else {
+    async complete() {
+        const userInfo = Auth.getUserInfo();
+        if (!userInfo) {
             location.href = '#/';
         }
+        try {
+            const result = await CustomHttp.request(config.host + '/tests/' + this.testId + '/pass', 'POST',
+                {
+                    userId: userInfo.userId,
+                    results: this.userResult
+                });
+
+            if (result) {
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+
+                localStorage.setItem('results', JSON.stringify(this.finalAnswers));
+                location.href = '#/result';
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+
+        // const xhr = new XMLHttpRequest();
+        // xhr.open('POST', 'https://testologia.site/pass-quiz?id=' + this.testId, false);
+        // xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        // xhr.send(JSON.stringify({
+        //     name: name,
+        //     lastName: lastName,
+        //     email: email,
+        //     results: this.userResult
+        // }));
+        //
+        //
+        // if (xhr.status === 200 && xhr.responseText) {
+        //     let result = null;
+        //     try {
+        //         result = JSON.parse(xhr.responseText);
+        //     } catch (e) {
+        //         location.href = '#/';
+        //     }
+        //     if (result) {
+        //
+        //     }
+        //     this.startQuiz();
+        // } else {
+        //     location.href = '#/';
+        // }
     }
 }
