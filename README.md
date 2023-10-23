@@ -5,7 +5,7 @@
 --
 
 <img width="1470" alt="image" src="https://github.com/nectorprog/itlogia-quiz/assets/109895680/5f8d88e0-921c-4de5-a149-8b24f8df64a9">
-*Скриншот главной страницы*
+Скриншот главной страницы
 
 Основные функции и возможности платформы:
 
